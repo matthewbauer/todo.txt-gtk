@@ -1,0 +1,20 @@
+#!/usr/bin/english
+
+About
+===============
+
+A simple Graphical User Interface for todo.txt written in Python
+
+Requirements
+===============
+
+* gtk
+* python
+* pygtk
+* todo.sh
+
+Usage
+===============
+
+./todo.py
+
