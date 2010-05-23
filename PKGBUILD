@@ -3,11 +3,12 @@ ___pkgname=todo
 __pkgname=$___pkgname.txt
 _pkgname=$__pkgname-gtk
 pkgname=$_pkgname-git
-pkgver=1
+pkgver=20100523
 pkgrel=1
 pkgdesc="Graphical User Interface for $__pkgname in Python"
 url="http://github.com/paradoq/$_pkgname"
 license=('GPL')
+arch=('any')
 depends=('gtk'
          'python'
          'pygtk'
