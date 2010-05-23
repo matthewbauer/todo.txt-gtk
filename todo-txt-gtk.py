@@ -56,7 +56,7 @@ class mainWindow(gtk.Window):
 		vbox.pack_start(hbox1, False, False, 0)
 
 		entry = gtk.Entry()
-		entry.set_max_length(50)
+		#entry.set_max_length(50)
 		entry.connect("activate", self.enter_callback, entry)
 		hbox1.pack_start(entry, True, True, 0)
 
@@ -77,15 +77,14 @@ class mainWindow(gtk.Window):
 		target_vbox.border=5
 
 		self.target_vbox = target_vbox
+		self.insertTasks(todotxt, self.target_vbox)
 
 		scrolled_window.add_with_viewport(self.target_vbox)
 
-		self.insertTasks(todotxt, self.target_vbox)
-
-		hbox3 = gtk.HBox(False, 0)
-		self.label=gtk.Label("Done.")
-		hbox3.pack_start(self.label, False, False, 0)
-		vbox.pack_start(hbox3, False, False, 0)
+		#hbox3 = gtk.HBox(False, 0)
+		#self.label=gtk.Label("Done.")
+		#hbox3.pack_start(self.label, False, False, 0)
+		#vbox.pack_start(hbox3, False, False, 0)
 
 		self.add(vbox)
 
@@ -96,21 +95,24 @@ class mainWindow(gtk.Window):
 	def enter_callback(self, widget, entry):
 		output=self.todotxt.addTask(entry.get_text())
 		widget.set_text("")
-		self.label.set_text(output)
+		#self.label.set_text(output)
 		self.insertTasks(self.todotxt, self.target_vbox)
 
 	def check_callback(self, widget, data=None):
 		if widget.get_active(): # on
 			if data:
 				output = self.todotxt.doTask(data)
-				self.label.set_text(output)
+				#self.label.set_text(output)
 		else: # off
 			if data:
 				output = self.todotxt.undoTask(data)
-				if output: self.label.set_text(output)
+				#if output: self.label.set_text(output)
 		self.insertTasks(self.todotxt, self.target_vbox)
 
 	def insertTasks(self, todotxt, vbox):
+		for child in vbox.get_children():
+			vbox.remove(child)
+
 		for task in todotxt.getTasks():
 			hbox=gtk.HBox(False, 0)
 			button = gtk.CheckButton()
@@ -119,7 +121,7 @@ class mainWindow(gtk.Window):
 			label=gtk.Label(task[1])
 			hbox.pack_start(label, False, True, 0)
 			vbox.add(hbox)
-		vbox.show()
+		self.show_all()
 
 def main(argv=None):
 	if argv is None:
